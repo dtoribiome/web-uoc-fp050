@@ -1,0 +1,42 @@
+# Deployment: 2 réplicas de la web = alta disponibilidad
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-uoc
+  labels:
+    app: web-uoc
+spec:
+  replicas: 2                  # mínimo dos instancias = alta disponibilidad
+  selector:
+    matchLabels:
+      app: web-uoc
+  template:
+    metadata:
+      labels:
+        app: web-uoc
+    spec:
+      containers:
+        - name: web-uoc
+          image: IMAGEN          # Jenkins lo sustituye por web-uoc:<etiqueta>
+          imagePullPolicy: Never # la imagen se carga localmente en Minikube
+          ports:
+            - containerPort: 8080
+          readinessProbe:        # no recibe tráfico hasta que /health responde
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:         # si deja de responder, Kubernetes lo reinicia
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi

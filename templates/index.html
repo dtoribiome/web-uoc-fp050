@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soy alumno de la UOC</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background:#f4f6fa; color:#1d2433;
+           display:flex; flex-direction:column; align-items:center; margin:0; padding:40px 16px; }
+    h1   { color:#1f3b73; }
+    img  { max-width:320px; width:100%; margin:20px 0; }
+    .info{ background:#fff; border-radius:8px; padding:16px 24px; box-shadow:0 1px 4px rgba(0,0,0,.1); }
+    code { background:#eef1f7; padding:2px 6px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <h1>{{.Mensaje}}</h1>
+  <img src="/static/img/uoc.svg" alt="Imagen de la aplicación">
+  <div class="info">
+    <p>Alumno: <strong>{{.Alumno}}</strong></p>
+    <p>Servidor: <code>{{.Host}}</code> · Hora: <code>{{.Hora}}</code></p>
+    <p>Endpoints: <code>GET /</code> <code>GET|POST|PUT|DELETE /api/mensajes</code> <code>GET /health</code></p>
+  </div>
+</body>
+</html>
