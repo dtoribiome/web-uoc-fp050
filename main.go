@@ -77,7 +77,7 @@ func inicio(w http.ResponseWriter, r *http.Request) {
 func pod(w http.ResponseWriter, r *http.Request) {
 	host, _ := os.Hostname()
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	fmt.Fprintf(w, "Hola desde el pod %s\n", host)
+	   fmt.Fprintf(w, "Hola desde el pod %s - version 2\n", host)
 }
 
 // /api/mensajes -> API REST que captura distintos tipos de peticiones.
